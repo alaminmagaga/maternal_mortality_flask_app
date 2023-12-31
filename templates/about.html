@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+   
+    <title>About</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #ffffff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+        }
+        h1 {
+            font-size: 24px;
+            color: #333;
+        }
+        p {
+            font-size: 16px;
+            line-height: 1.5;
+            color: #555;
+        }
+        .highlight {
+           
+            color: white;
+            font-weight: bold;
+        }
+        .key-features {
+            margin-top: 20px;
+        }
+        .key-feature {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="flex items-center justify-between flex-wrap bg-teal-500 p-6">
+        <div class="flex items-center flex-shrink-0 text-white mr-6">
+            <a href="/"><img src="{{ url_for('static', filename='fact.png') }}" width="120px"></a> 
+         
+        </div>
+        <div class="block lg:hidden">
+          <button class="flex items-center px-3 py-2 border rounded text-teal-200 border-teal-400 hover:text-white hover:border-white">
+            <svg class="fill-current h-3 w-3" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Home</title><path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"/></svg>
+          </button>
+        </div>
+        <div class="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
+          <div class="text-sm lg:flex-grow">
+            <a href="/" class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
+           Home
+            </a>
+            <a href="" class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
+           Contact
+            </a>
+            <a href="/about" class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white">
+              About
+            </a>
+          </div>
+          <div>
+            <a href="/how_to_use" class="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 lg:mt-0">How to Use</a>
+          </div>
+        </div>
+      </nav>
+   
+    <div class="container">
+        <h1 style="font-size: 30px;text-align: center;" ><b>About FactCheck Africa</b></h1>
+        <p>Welcome to our News and Fact Authenticity Checker web application! In today's fast-paced digital age, it's crucial to ensure the credibility of the news articles we consume. Our web app provides you with a powerful set of tools to help you verify the authenticity of news and statements quickly and conveniently.</p>
+        
+        <div class="key-features">
+            <div class="key-feature">
+                <p class="highlight bg-teal-500">Key Features:</p>
+                <ul>
+                    <li><strong>News Authenticity Checker:</strong> Our app utilizes a list of reputable news sources to determine the authenticity of news articles. It cross-references the source domain of each article to distinguish between credible and non-credible sources. You can simply enter a news query, and our app will provide you with an assessment of the article's authenticity. It will let you know if it's credible, partially credible, or unreliable.</li>
+                    <li><strong>Fact-Checking Engine:</strong> We have integrated two fact-checking mechanisms into our app to ensure the accuracy of information. The Fact Check API retrieves the top-rated fact-checking result for your query, giving you a quick summary of the article's trustworthiness. The OpenAI GPT-4 engine is employed to perform in-depth fact-checking, generating detailed responses to help you make informed judgments about the content you read.</li>
+                    <li><strong>Sentiment Analysis:</strong> Our app also provides sentiment analysis for your queries. It evaluates the overall sentiment of a news article or statement, indicating whether it leans positive, negative, or neutral.</li>
+                    <li><strong>Reliable Source Recommendations:</strong> Want to access news from reliable sources? We've got you covered. Our app suggests credible sources related to your query, helping you stay informed from trusted outlets.</li>
+                </ul>
+            </div>
+            
+            <div class="key-feature">
+                <p class="highlight bg-teal-500">How to Use:</p>
+                <ol>
+                    <li>Simply visit our website and input your news query or statement.</li>
+                    <li>Click the "Check" button, and our app will quickly assess the authenticity and sentiment of the content.</li>
+                    <li>Explore fact-checking results and discover credible sources for further information.</li>
+                </ol>
+            </div>
+        </div>
+        
+        <p><strong>Why Use Our App?</strong> In an era of misinformation and fake news, our News Authenticity Checker empowers you to make informed decisions about the news you consume. We believe in transparency and the importance of accessing reliable information.</p>
+        
+        <p><strong>Disclaimer:</strong> Our app serves as a tool to aid in news assessment but does not guarantee absolute accuracy. Always exercise critical thinking and consider multiple sources when evaluating news.</p>
+        
+        <p>Start verifying your news and statements today with our <strong>News Authenticity Checker</strong>!</p>
+    </div>
+</body>
+</html>

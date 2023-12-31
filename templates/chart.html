@@ -1,0 +1,451 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>DASHBOARD</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
+
+        <!-- Google Web Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700&display=swap" rel="stylesheet">
+        
+        <!-- Icon Font Stylesheet -->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+    
+       <!-- Libraries Stylesheet -->
+    <link href="{{ url_for('static', filename='dashboard/lib/owlcarousel/assets/owl.carousel.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='dashboard/lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css') }}" rel="stylesheet" />
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="{{ url_for('static', filename='dashboard/bootstrap.min.css') }}" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="{{ url_for('static', filename='dashboard/css/style.css') }}" rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="{{ url_for('static', filename='dashboard/vendor/animate.css/animate.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='dashboard/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='dashboard/vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='dashboard/vendor/boxicons/css/boxicons.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='dashboard/vendor/glightbox/css/glightbox.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='dashboard/vendor/swiper/swiper-bundle.min.css') }}" rel="stylesheet">
+
+    <!-- Template Main CSS File -->
+    <link href="{{ url_for('static', filename='dashboard/css/style.css') }}" rel="stylesheet">
+
+
+      <style>
+        .table-container {
+            overflow-x: auto;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%; /* Ensure the table takes full width */
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+    
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+    
+        th {
+            background-color: #f2f2f2;
+        }
+    
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+    
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+    </style>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+</head>
+
+<body>
+
+ <div class="w3-sidebar w3-light-grey w3-bar-block" style="width:25%">
+        <h3 class="w3-bar-item">Maternal Health</h3>
+        <a href="/" class="w3-bar-item w3-button">Home</a>
+        <a href="{{ url_for('chart') }}" class="w3-bar-item w3-button">Dashboard</a>
+        <a href="https://omdena.com/chapter-challenges/analyzing-maternal-health-in-nigeria-using-machine-learning/"
+            class="w3-bar-item w3-button">About</a>
+    </div>
+
+<!-- Page Content -->
+<div style="margin-left:25%">
+
+    <div class="w3-container w3-teal w3-center">
+        <h1 style="color: white;">Dashboard</h1>
+      </div>
+
+    <div class="table-container">
+        <table border="1">
+            <thead>
+                <tr>
+                    {% for column in df_head.columns %}
+                        <th>{{ column }}</th>
+                    {% endfor %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for index, row in df_head.iterrows %}
+                    <tr>
+                        {% for value in row %}
+                            <td>{{ value }}</td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{{risk_status_counts}}
+    
+            <!-- Chart Start -->
+            <div class="container-fluid pt-4 px-4">
+                <div class="row g-4">
+                    <!-- <div class="col-sm-12 col-xl-6">
+                        <div class="bg-light rounded h-100 p-4">
+                            <h6 class="mb-4">Single Line Chart</h6>
+                            <canvas id="line-chart"></canvas>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-xl-6">
+                        <div class="bg-light rounded h-100 p-4">
+                            <h6 class="mb-4">Multiple Line Chart</h6>
+                            <canvas id="salse-revenue"></canvas>
+                        </div>
+                    </div> -->
+                    <div class="col-sm-12 col-xl-6">
+                        <div class="bg-light rounded h-100 p-4">
+                            <h6 class="mb-4">Marital Status Bar Chart</h6>
+                            <canvas id="marital-bar-chart"></canvas>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-xl-6">
+                        <div class="bg-light rounded h-100 p-4">
+                            <h6 class="mb-4">Religion Status Bar Chart</h6>
+                            <canvas id="religion-bar-chart"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-12 col-xl-6">
+                        <div class="bg-light rounded h-100 p-4">
+                            <h6 class="mb-4">ethnicity Status Bar Chart</h6>
+                            <canvas id="ethnicity-bar-chart"></canvas>
+                        </div>
+                    </div>
+
+                
+                    <div class="col-sm-12 col-xl-6">
+                        <div class="bg-light rounded h-100 p-4">
+                            <h6 class="mb-4">Age Bar Chart</h6>
+                            <canvas id="age-bar-chart"></canvas>
+                        </div>
+                    </div>
+                 
+
+
+                    <div class="col-sm-12 col-xl-6">
+                        <div class="bg-light rounded h-100 p-4">
+                            <h6 class="mb-4">Risk Category Pie Chart</h6>
+                            <canvas id="religion-pie-chart"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-12 col-xl-6">
+                        <div class="bg-light rounded h-100 p-4">
+                            <h6 class="mb-4">Ethnicity Doughnut Chart</h6>
+                            <canvas id="doughnut-chart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Chart End -->
+</div>
+
+            <!-- Footer Start -->
+            <div class="container-fluid pt-4 px-4">
+                <div class="bg-light rounded-top p-4">
+                    <div class="row">
+                        
+                    </div>
+                </div>
+            </div>
+            <!-- Footer End -->
+     
+
+        <!-- Back to Top -->
+        <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+
+    
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ url_for('static', filename='dashboard/lib/chart/chart.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='dashboard/lib/easing/easing.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='dashboard/lib/waypoints/waypoints.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='dashboard/lib/owlcarousel/owl.carousel.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='dashboard/lib/tempusdominus/js/moment.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='dashboard/lib/tempusdominus/js/moment-timezone.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='dashboard/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js') }}"></script>
+
+    <!-- Template Javascript -->
+    <script>
+(function ($) {
+    "use strict";
+
+    // Spinner
+    var spinner = function () {
+        setTimeout(function () {
+            if ($('#spinner').length > 0) {
+                $('#spinner').removeClass('show');
+            }
+        }, 1);
+    };
+    spinner();
+    
+    
+    // Back to top button
+    $(window).scroll(function () {
+        if ($(this).scrollTop() > 300) {
+            $('.back-to-top').fadeIn('slow');
+        } else {
+            $('.back-to-top').fadeOut('slow');
+        }
+    });
+    $('.back-to-top').click(function () {
+        $('html, body').animate({scrollTop: 0}, 1500, 'easeInOutExpo');
+        return false;
+    });
+
+
+    // Sidebar Toggler
+    $('.sidebar-toggler').click(function () {
+        $('.sidebar, .content').toggleClass("open");
+        return false;
+    });
+
+
+    // Progress Bar
+    $('.pg-bar').waypoint(function () {
+        $('.progress .progress-bar').each(function () {
+            $(this).css("width", $(this).attr("aria-valuenow") + '%');
+        });
+    }, {offset: '80%'});
+
+
+    // Calender
+    $('#calender').datetimepicker({
+        inline: true,
+        format: 'L'
+    });
+
+
+    // Testimonials carousel
+    $(".testimonial-carousel").owlCarousel({
+        autoplay: true,
+        smartSpeed: 1000,
+        items: 1,
+        dots: true,
+        loop: true,
+        nav : false
+    });
+
+
+
+
+
+
+    // Marital Bar Chart
+    var ctx4 = $("#marital-bar-chart").get(0).getContext("2d");
+    var myChart4 = new Chart(ctx4, {
+        type: "bar",
+        data: {
+            labels: ['Married', 'Never in union', 'Widowed', 'Living with partner', 'separated', 'Divorced'],
+            datasets: [{
+                label: "status count",
+                fill: false,
+                backgroundColor: [
+                    
+                    "rgba(54, 162, 235, 0.7)", // Blue for Living with partner 
+                    "rgba(255, 99, 132, 0.7)", // Red for Never in union
+                    "rgba(255, 206, 86, 0.7)", // Yellow for Married
+                    "rgba(75, 192, 192, 0.7)", // Teal for No longer living together/separated
+                    "rgba(153, 102, 255, 0.7)", // Purple for Divorced
+                ],
+                data: {{marital_status_counts}}
+               
+            }]
+        },
+        options: {
+            responsive: true
+        }
+    });
+
+
+    // Religion Bar Chart
+    var ctx4 = $("#religion-bar-chart").get(0).getContext("2d");
+    var myChart4 = new Chart(ctx4, {
+        type: "bar",
+        data: {
+            labels: ['Islam', 'Other Christian', 'Catholic', 'Other', 'Traditionalist'],
+            datasets: [{
+                label: "",
+                fill: false,
+                backgroundColor: [
+                    "rgba(54, 162, 235, 0.7)", // 
+                    "rgba(75, 192, 192, 0.7)", // 
+                    "rgba(255, 206, 86, 0.7)", // 
+                    "rgba(255, 99, 132, 0.7)", // 
+                ],
+                data: {{religion_status_counts}}
+               
+            }]
+        },
+        options: {
+            responsive: true
+        }
+    });
+
+// Age Bar Chart
+var ctx4 = $("#age-bar-chart").get(0).getContext("2d");
+var myChart4 = new Chart(ctx4, {
+    type: "bar",
+    data: {
+        labels: {{age_status}},
+        datasets: [{
+            label: "Age Count",
+            fill: false,
+            backgroundColor: [
+                "rgba(54, 162, 235, 0.7)", // 
+               
+            ],
+            data: {{age_status_counts}}
+           
+        }]
+    },
+    options: {
+        responsive: true
+    }
+});
+
+
+
+    // Ethnicity Bar Chart
+    var ctx4 = $("#ethnicity-bar-chart").get(0).getContext("2d");
+    var myChart4 = new Chart(ctx4, {
+        type: "bar",
+        data: {
+            labels: ["Yoruba", "Fulani", "Hausa", "Igbo","Ijaw/Izon","Tiv","Kanuri/Beriberi","Ibibio","Igala","Ekoi","Others"],
+   
+            datasets: [{
+                label: "Ethinicity",
+                fill: false,
+                backgroundColor: [
+
+                    "rgba(54, 162, 235, 0.7)", // Blue for Yoruba 
+                    "rgba(255, 99, 132, 0.7)", // Red for Fulani
+                    "rgba(255, 206, 86, 0.7)", // Yellow for Hausa
+                    "rgba(75, 192, 192, 0.7)", // Teal for Igbo
+                    "rgba(153, 102, 255, 0.7)", // Purple for Ijaw/Izon
+                    "rgba(255, 159, 64, 0.7)", // Orange for Tiv
+                    "rgba(0, 255, 0, 0.7)",     // Green for Kanuri/Beriberi
+                    "rgba(255, 0, 0, 0.7)",     // Red for Ibibio
+                    "rgba(255, 69, 0, 0.7)",    // Red-Orange for Igala
+                    "rgba(218, 112, 214, 0.7)", // Orchid for Ekoi
+                    "rgba(128, 128, 128, 0.7)", // Gray for Others
+                ],
+                data: {{ethnicity_status_counts}}
+               
+            }]
+        },
+        options: {
+            responsive: true
+        }
+    });
+
+
+    
+
+    // Religion Pie Chart
+    var ctx5 = $("#religion-pie-chart").get(0).getContext("2d");
+    var myChart5 = new Chart(ctx5, {
+        type: "pie",
+        data: {
+            labels: ['Medium', 'High', 'Low'],
+            datasets: [{
+                backgroundColor: [
+                    "rgba(255, 99, 132, 0.7)", // Red for Islam
+                    "rgba(54, 162, 235, 0.7)", // Blue for Christian
+                    "rgba(255, 206, 86, 0.7)", // Yellow for Traditionalist
+                    "rgba(75, 192, 192, 0.7)", // Teal for Others
+                ],
+                data: {{risk_status_counts}}
+            }]
+        },
+        options: {
+            responsive: true
+        }
+    });
+
+
+    // Ethnicity Doughnut Chart
+    var ctx6 = $("#doughnut-chart").get(0).getContext("2d");
+    var myChart6 = new Chart(ctx6, {
+        type: "doughnut",
+        data: {
+            labels: ["Yoruba", "Fulani", "Hausa", "Igbo","Ijaw/Izon","Tiv","Kanuri/Beriberi","Ibibio","Igala","Ekoi","Others"],
+   
+            datasets: [{
+                backgroundColor: [
+                    "rgba(255, 99, 132, 0.7)", // Red for Yoruba
+                    "rgba(54, 162, 235, 0.7)", // Blue for Fulani
+                    "rgba(255, 206, 86, 0.7)", // Yellow for Hausa
+                    "rgba(75, 192, 192, 0.7)", // Teal for Igbo
+                    "rgba(153, 102, 255, 0.7)", // Purple for Ijaw/Izon
+                    "rgba(255, 159, 64, 0.7)", // Orange for Tiv
+                    "rgba(0, 255, 0, 0.7)",     // Green for Kanuri/Beriberi
+                    "rgba(255, 0, 0, 0.7)",     // Red for Ibibio
+                    "rgba(255, 69, 0, 0.7)",    // Red-Orange for Igala
+                    "rgba(218, 112, 214, 0.7)", // Orchid for Ekoi
+                    "rgba(128, 128, 128, 0.7)", // Gray for Others
+                ],
+                data: [5372, 2953, 10765, 6714,1201,976,873,801,457,275,11404]
+               
+            }]
+        },
+        options: {
+            responsive: true
+        }
+    });
+
+    
+})(jQuery);
+
+
+
+    </script>
+  
+</body>
+
+</html>
