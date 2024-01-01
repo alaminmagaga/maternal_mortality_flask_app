@@ -109,16 +109,25 @@
             </thead>
             <tbody>
                 {% for index, row in df_head.iterrows() %}
+<<<<<<< HEAD
                 <tr>
                     {% for value in row %}
                         <td>{{ value }}</td>
                     {% endfor %}
                 </tr>
             {% endfor %}
+=======
+    <tr>
+        {% for value in row %}
+            <td>{{ value }}</td>
+        {% endfor %}
+    </tr>
+{% endfor %}
+>>>>>>> 089ec0d2d4ef1b7fffb4672d17dddc4cb6f3b4d7
             </tbody>
         </table>
     </div>
-{{risk_status_counts}}
+
     
             <!-- Chart Start -->
             <div class="container-fluid pt-4 px-4">
