@@ -108,13 +108,13 @@
                 </tr>
             </thead>
             <tbody>
-                {% for index, row in df_head.iterrows %}
-                    <tr>
-                        {% for value in row %}
-                            <td>{{ value }}</td>
-                        {% endfor %}
-                    </tr>
-                {% endfor %}
+                {% for index, row in df_head.iterrows() %}
+                <tr>
+                    {% for value in row %}
+                        <td>{{ value }}</td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
             </tbody>
         </table>
     </div>
